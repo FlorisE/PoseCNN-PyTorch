@@ -44,11 +44,7 @@ class YCBObject(data.Dataset, datasets.imdb):
         self._classes_all = ('__background__', '002_master_chef_can', '003_cracker_box', '004_sugar_box', '005_tomato_soup_can', '006_mustard_bottle', \
                          '007_tuna_fish_can', '008_pudding_box', '009_gelatin_box', '010_potted_meat_can', '011_banana', '019_pitcher_base', \
                          '021_bleach_cleanser', '024_bowl', '025_mug', '035_power_drill', '036_wood_block', '037_scissors', '040_large_marker', \
-                         '051_large_clamp', '052_extra_large_clamp', '061_foam_brick', 'holiday_cup1', 'holiday_cup2', 'sanning_mug', \
-                         '001_chips_can', 'block_red_big', 'block_green_big', 'block_blue_big', 'block_yellow_big', \
-                         'block_red_small', 'block_green_small', 'block_blue_small', 'block_yellow_small', \
-                         'block_red_median', 'block_green_median', 'block_blue_median', 'block_yellow_median',
-                         'fusion_duplo_dude', 'cabinet_handle')
+                         '051_large_clamp', '052_extra_large_clamp', '061_foam_brick', '001_chips_can')
         self._num_classes_all = len(self._classes_all)
         self._class_colors_all = [(255, 255, 255), (255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 0, 255), (0, 255, 255), \
                               (0, 0, 128), (0, 128, 0), (128, 0, 0), (128, 128, 0), (128, 0, 128), (0, 128, 128), \
