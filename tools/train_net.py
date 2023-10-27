@@ -11,6 +11,7 @@ import torch.nn.parallel
 import torch.backends.cudnn as cudnn
 import torch.optim
 import torch.utils.data
+from torch.utils.tensorboard import SummaryWriter
 
 import argparse
 import pprint
@@ -117,6 +118,8 @@ if __name__ == '__main__':
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
+    writer = SummaryWriter(output_dir)
+
     # prepare network
     if args.pretrained:
         network_data = torch.load(args.pretrained)
@@ -164,7 +167,7 @@ if __name__ == '__main__':
         if args.solver == 'sgd':
             scheduler.step()
 
-        train(dataloader, background_loader, network, optimizer, epoch)
+        train(dataloader, background_loader, network, optimizer, epoch, writer)
 
         # save checkpoint
         if (epoch+1) % cfg.TRAIN.SNAPSHOT_EPOCHS == 0 or epoch == args.epochs - 1:

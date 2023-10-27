@@ -80,7 +80,7 @@ sample = {'image_color': im_blob,
           'vertex_weights': vertex_weights}
 '''
 
-def train(train_loader, background_loader, network, optimizer, epoch):
+def train(train_loader, background_loader, network, optimizer, epoch, writer):
 
     batch_time = AverageMeter()
     losses = AverageMeter()
@@ -192,6 +192,14 @@ def train(train_loader, background_loader, network, optimizer, epoch):
             print('[%d/%d][%d/%d], loss %.4f, lr %.6f, time %.2f' \
                % (epoch, cfg.epochs, i, epoch_size, loss, optimizer.param_groups[0]['lr'], batch_time.val))
         cfg.TRAIN.ITERS += 1
+    if cfg.TRAIN.VERTEX_REG:
+        writer.add_scalar('Label loss', loss_label.data, epoch)
+        writer.add_scalar('Vertex loss', loss_vertex.data, epoch)
+        writer.add_scalar('Box loss', loss_box.data, epoch)
+        writer.add_scalar('Location loss', loss_location.data, epoch)
+        if cfg.TRAIN.POSE_REG:
+            writer.add_scalar('Pose loss', loss_pose.data, epoch)
+    writer.add_scalar('Loss/train', loss.data, epoch)
 
 
 def _get_bb3D(extent):
